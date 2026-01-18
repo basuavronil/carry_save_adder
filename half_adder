@@ -1,0 +1,7 @@
+module ha(
+ input a, b,
+ output co_ha, so_ha
+ );
+ assign so_ha = a^b;
+ assign co_ha = a & b;
+ endmodule
