@@ -1,0 +1,23 @@
+module c_save_a(
+ input [3:0] x, y, z,
+ output [4:0] sum,
+ output  carry_out
+ );
+ wire [3:0] carry;
+ wire [3:0] s;
+ wire [3:0] c;
+ 
+ //instanciating
+ fa dut1(.x(x[0]), .y(y[0]), .z(z[0]), .c(c[0]), .s(s[0]));
+ fa dut2(.x(x[1]), .y(y[1]), .z(z[1]), .c(c[1]), .s(s[1]));
+ fa dut3(.x(x[2]), .y(y[2]), .z(z[2]), .c(c[2]), .s(s[2]));
+ fa dut4(.x(x[3]), .y(y[3]), .z(z[3]), .c(c[3]), .s(s[3]));
+ ha dut5(.a(c[0]), .b(s[1]), .co_ha(carry[0]), .so_ha(sum[1]));
+ fa dut6(.x(c[1]), .y(s[2]), .z(carry[0]), .c(carry[1]), .s(sum[2]));
+ fa dut7(.x(c[2]), .y(s[3]), .z(carry[1]), .c(carry[2]), .s(sum[3]));
+ ha dut8(.a(c[3]), .b(carry[2]), .co_ha(carry[3]), .so_ha(sum[4]));
+ 
+ assign sum[0] = s[0];
+ assign carry_out = carry[3];
+ 
+endmodule
